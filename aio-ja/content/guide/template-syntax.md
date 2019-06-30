@@ -307,19 +307,19 @@ Angular はすべての変更検知サイクルの後にテンプレート式を
 
 ## バインディング構文: 概要
 
-Data-binding is a mechanism for coordinating what users see, specifically
-with application data values.
-While you could push values to and pull values from HTML,
-the application is easier to write, read, and maintain if you turn these tasks over to a binding framework.
-You simply declare bindings between binding sources, target HTML elements, and let the framework do the rest.
+データバインディングは、具体的にはアプリケーションのデータ値を使用して、
+ユーザーに表示される内容を調整するための仕組みです。
+HTML から値をプッシュしたり、プルしたりすることはできますが、
+これらのタスクをバインディングフレームワークに任せることで、アプリケーションの作成、読み取り、保守が簡単になります。
+バインディングソースとターゲット HTML 要素の間のバインディングを宣言して、フレームワークに任せるだけです。
 
-For a demonstration of the syntax and code snippets in this section, see the <live-example name="binding-syntax">binding syntax example</live-example>.
+このセクションの構文とコードスニペットのデモンストレーションについては、<live-example name="binding-syntax">バインディングの構文の例</live-example>を参照してください。
 
-Angular provides many kinds of data-binding. Binding types can be grouped into three categories distinguished by the direction of data flow:
+Angularはさまざまな種類のデータバインディングを提供します。 バインディングタイプは、データフローの方向によって区別される3つのカテゴリに分類できます:
 
-* From the _source-to-view_
-* From _view-to-source_
-* Two-way sequence: _view-to-source-to-view_
+* _source-to-view_ から
+* _view-to-source_ から
+* 双方向シーケンス: _view-to-source-to-view_
 
 <style>
   td, th {vertical-align: top}
@@ -334,23 +334,23 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
   </col>
   <tr>
     <th>
-      Type
+      タイプ
     </th>
     <th>
-      Syntax
+      構文
     </th>
     <th>
-      Category
+      カテゴリー
     </th>
 
   </tr>
   <tr>
      <td>
-      Interpolation<br>
-      Property<br>
-      Attribute<br>
-      Class<br>
-      Style
+      補間<br>
+      プロパティ<br>
+      属性<br>
+      クラス<br>
+      スタイル
     </td>
     <td>
 
@@ -363,11 +363,11 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
     </td>
 
     <td>
-      One-way<br>from data source<br>to view target
+      データソースから<br>対象のビューへの<br>単方向
     </td>
     <tr>
       <td>
-        Event
+        イベント
       </td>
       <td>
         <code-example>
@@ -377,12 +377,12 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
       </td>
 
       <td>
-        One-way<br>from view target<br>to data source
+        対象のビューから<br>データソースへの<br>単方向
       </td>
     </tr>
     <tr>
       <td>
-        Two-way
+        双方向
       </td>
       <td>
         <code-example>
@@ -391,14 +391,14 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
         </code-example>
       </td>
       <td>
-        Two-way
+        双方向
       </td>
     </tr>
   </tr>
 </table>
 
-Binding types other than interpolation have a **target name** to the left of the equal sign, either surrounded by punctuation, `[]` or `()`,
-or preceded by a prefix: `bind-`, `on-`, `bindon-`.
+補間以外のバインディングタイプは、等号の左側に **ターゲット名** があり、区切り `[]` または `()` で囲まれているか、
+または接頭辞が前に付いています: `bind-`、`on-`、`bindon-`
 
 The *target* of a binding is the property or event inside the binding punctuation: `[]`, `()` or `[()]`.
 
