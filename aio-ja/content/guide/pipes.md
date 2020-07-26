@@ -42,8 +42,8 @@ Angular は、ロケール情報を使用してデータをフォーマットす
 パイプを適用するには、次のコード例に示すように、組み込みの [`DatePipe`](api/common/DatePipe) の名前 `date` と共に、テンプレート式内でパイプ演算子 (`|`) を使用します。
 この例のタブには、次のものが表示されます:
 
-* `app.component.html` uses `date` in a separate template to display a birthday.
-* `hero-birthday1.component.ts` uses the same pipe as part of an in-line template in a component that also sets the birthday value.
+* `app.component.html` は、セパレートテンプレートで `date` を使用して誕生日を表示します。
+* `hero-birthday1.component.ts` は、誕生日の値も設定するコンポーネントのインラインテンプレートの一部として同じパイプを使用します。
 
 <code-tabs>
   <code-pane
@@ -57,32 +57,32 @@ Angular は、ロケール情報を使用してデータをフォーマットす
   </code-pane>
 </code-tabs>
 
-The component's `birthday` value flows through the
-[pipe operator](guide/template-syntax#pipe) ( | ) to the [`date`](api/common/DatePipe)
-function.
+コンポーネントの誕生日の値は
+[パイプ演算子](guide/template-syntax#pipe) ( | ) を介して
+[`date`](api/common/DatePipe) 関数に渡されます。
 
 {@a parameterizing-a-pipe}
 
-## Formatting data with parameters and chained pipes
+## パラメータとチェーンパイプを使用したデータのフォーマット
 
-Use optional parameters to fine-tune a pipe's output.
-For example, you can use the [`CurrencyPipe`](api/common/CurrencyPipe "API reference") with a country code such as EUR as a parameter.
-The template expression `{{ amount | currency:'EUR' }}` transforms the `amount` to currency in euros.
-Follow the pipe name (`currency`) with a colon (`:`) and the parameter value (`'EUR'`).
+オプションのパラメーターを使用して、パイプの出力を微調整します。
+たとえば、パラメーターとして EUR などの国コードを使用して [`CurrencyPipe`](api/common/CurrencyPipe "API reference") を使用できます。
+テンプレート式 `{{ amount | currency:'EUR' }}` は `amount` をユーロ通貨に変換します。 
+パイプ名 (`currency`) の後にコロン (`:`) とパラメーター値 (`'EUR'`) を付けます。
 
-If the pipe accepts multiple parameters, separate the values with colons.
-For example, `{{ amount | currency:'EUR':'Euros '}}` adds the second parameter, the string literal `'Euros '`, to the output string. You can use any valid template expression as a parameter, such as a string literal or a component property.
+パイプが複数のパラメーターを受け入れる場合は、値をコロンで区切ります。
+たとえば `{{ amount | currency:'EUR':'Euros '}}` は、2番目のパラメーターである文字列リテラル `'Euros '` を出力文字列に追加します。 文字列リテラルやコンポーネントプロパティなど、任意の有効なテンプレート式をパラメーターとして使用できます。
 
-Some pipes require at least one parameter and allow more optional parameters, such as [`SlicePipe`](/api/common/SlicePipe "API reference for SlicePipe"). For example, `{{ slice:1:5 }}` creates a new array or string containing a subset of the elements starting with element `1` and ending with element `5`.
+いくつかのパイプは、少なくとも 1 つのパラメーターを必要とし、 [`SlicePipe`](/api/common/SlicePipe "API reference for SlicePipe") などのより多くのオプションパラメーターを許可します。 たとえば `{{ slice:1:5 }}` は、要素 `1` で始まり要素 `5` で終わる要素のサブセットを含む新しい配列または文字列を作成します。
 
-### Example: Formatting a date
+### 例: 日付のフォーマット
 
-The tabs in the following example demonstrates toggling between two different formats (`'shortDate'` and `'fullDate'`):
+次の例のタブは、2つの異なる形式 (`'shortDate'` and `'fullDate'`) の切り替えを示しています:
 
-* The `app.component.html` template uses a format parameter for the [`DatePipe`](api/common/DatePipe) (named `date`) to show the date as **04/15/88**.
-* The `hero-birthday2.component.ts` component binds the pipe's format parameter to the component's `format` property in the `template` section, and adds a button for a click event bound to the component's `toggleFormat()` method.
-* The `hero-birthday2.component.ts` component's `toggleFormat()` method toggles the component's `format` property between a short form
-(`'shortDate'`) and a longer form (`'fullDate'`).
+* `app.component.html` テンプレートは、 [`DatePipe`](api/common/DatePipe) （名前付き `date`） のフォーマットパラメータを使用して、日付を **04/15/88** として表示します。
+* `hero-birthday2.component.ts` コンポーネントは、パイプのフォーマットパラメータを `テンプレート` セクションのコンポーネントの `format` プロパティにバインドし、コンポーネントの `toggleFormat()` メソッドにバインドされたクリックイベントのボタンを追加します。
+* `hero-birthday2.component.ts` コンポーネントの `toggleFormat()` メソッドは、コンポーネントの `format` プロパティを
+短い形式 (`shortDate`) と長い形式 (`fullDate`) の間で切り替えます。
 
 <code-tabs>
   <code-pane
@@ -102,17 +102,17 @@ The tabs in the following example demonstrates toggling between two different fo
   </code-pane>
 </code-tabs>
 
-Clicking the **Toggle Format** button alternates the date format between **04/15/1988** and **Friday, April 15, 1988** as shown in Figure 1.
+Figure 1. に示すように、 **Toggle Format** ボタンをクリックすると、日付形式が **04/15/1988** と **Friday, April 15, 1988** に切り替わります。
 
 <div class="lightbox">
   <img src='generated/images/guide/pipes/date-format-toggle-anim.gif' alt="Date Format Toggle">
 </div>
 
-**Figure 1.** Clicking the button toggles the date format
+**Figure 1.** ボタンをクリックすると日付形式が切り替わります
 
 <div class="alert is-helpful">
 
-For `date` pipe format options, see [DatePipe](api/common/DatePipe "DatePipe API Reference page").
+`date` パイプのフォーマットオプションについては [DatePipe](api/common/DatePipe "DatePipe API Reference page") を参照してください。
 
 </div>
 
