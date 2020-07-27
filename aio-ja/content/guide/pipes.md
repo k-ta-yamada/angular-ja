@@ -116,13 +116,13 @@ Figure 1. に示すように、 **Toggle Format** ボタンをクリックする
 
 </div>
 
-### Example: Applying two formats by chaining pipes
+### 例: パイプをチェーンして2つの形式を適用する
 
-You can chain pipes so that the output of one pipe becomes the input to the next.
+1 つのパイプの出力が次のパイプの入力になるようにパイプをチェーンすることができます。
 
-In the following example, chained pipes first apply a format to a date value, then convert the formatted date to uppercase characters.
-The first tab for the `src/app/app.component.html` template chains `DatePipe` and `UpperCasePipe` to display the birthday as **APR 15, 1988**.
-The second tab for the `src/app/app.component.html` template passes the `fullDate` parameter to `date` before chaining to `uppercase`, which produces **FRIDAY, APRIL 15, 1988**.
+次の例では、チェーンされたパイプが最初に日付の値にフォーマットを適用し、次にフォーマットされた日付を大文字に変換します。
+`src/app/app.component.html` テンプレートの最初のタブは `DatePipe` と `UpperCasePipe` をつなげて、誕生日を **APR 15, 1988** として表示します。
+`src/app/app.component.html` テンプレートの 2 番目のタブは `uppercase` にチェーンする前の `date` に `fullDate` パラメーターを渡し、 **FRIDAY, APRIL 15, 1988** を生成します。
 
 <code-tabs>
   <code-pane
@@ -139,46 +139,46 @@ The second tab for the `src/app/app.component.html` template passes the `fullDat
 
 {@a Custom-pipes}
 
-## Creating pipes for custom data transformations
+## カスタムデータ変換用のパイプの作成
 
-Create custom pipes to encapsulate transformations that are not provided with the built-in pipes.
-You can then use your custom pipe in template expressions, the same way you use built-in pipes—to transform input values to output values for display.
+組み込みパイプでは提供されない変換をカプセル化するカスタムパイプを作成します。
+次に、組み込みパイプを使用するのと同じ方法で、テンプレート式でカスタムパイプを使用して、入力値を出力値に変換して表示できます。
 
-### Marking a class as a pipe
+### クラスをパイプとしてマークする
 
-To mark a class as a pipe and supply configuration metadata, apply the [`@Pipe`](/api/core/Pipe "API reference for Pipe") [decorator](/guide/glossary#decorator--decoration "Definition for decorator") to the class.
-Use [UpperCamelCase](guide/glossary#case-types "Definition of case types") (the general convention for class names) for the pipe class name, and [camelCase](guide/glossary#case-types "Definition of case types") for the corresponding `name` string.
-Do not use hyphens in the `name`.
-For details and more examples, see [Pipe names](guide/styleguide#pipe-names "Pipe names in the Angular coding style guide").
+クラスをパイプとしてマークし、構成メタデータを提供するには、 [`@Pipe`](/api/core/Pipe "API reference for Pipe") [デコレーター](/guide/glossary#decorator--decoration "Definition for decorator") をクラスに適用します。
+パイプクラス名には [UpperCamelCase](guide/glossary#case-types "Definition of case types") (クラス名の一般的な規則) を使用し、対応する `name` 文字列には [camelCase](guide/glossary#case-types "Definition of case types") を使用します。
+`name` にハイフンを使用しないでください。
+詳細およびその他の例については、 [Pipe names](guide/styleguide#pipe-names "Pipe names in the Angular coding style guide") を参照してください。
 
-Use `name` in template expressions as you would for a built-in pipe.
+組み込みパイプの場合と同様に、テンプレート式で `name` を使用します。
 
 <div class="alert is-important">
 
-* Include your pipe in the `declarations` field of the `NgModule` metadata in order for it to be available to a template. See the `app.module.ts` file in the example app (<live-example></live-example>). For details, see [NgModules](guide/ngmodules "NgModules introduction").
-* Register your custom pipes. The [Angular CLI](cli "CLI Overview and Command Reference") [`ng generate pipe`](cli/generate#pipe "ng generate pipe in the CLI Command Reference") command registers the pipe automatically.
+* `NgModule` メタデータの `declarations` フィールドにパイプを含めて、テンプレートで使用できるようにします。 サンプルアプリの `app.module.ts` ファイルをご覧ください (<live-example></live-example>) 。 詳細については [NgModules](guide/ngmodules "NgModules introduction") を参照してください。
+* カスタムパイプを登録します。 [Angular CLI](cli "CLI Overview and Command Reference") [`ng generate pipe`](cli/generate#pipe "ng generate pipe in the CLI Command Reference") コマンドは、パイプを自動的に登録します。
 
 </div>
 
-### Using the PipeTransform interface
+### PipeTransformインターフェースの使用
 
-Implement the [`PipeTransform`](/api/core/PipeTransform "API reference for PipeTransform") interface in your custom pipe class to perform the transformation.
+カスタムパイプクラスに [`PipeTransform`](/api/core/PipeTransform "API reference for PipeTransform") インターフェイスを実装して、変換を実行します。
 
-Angular invokes the `transform` method with the value of a binding as the first argument, and any parameters as the second argument in list form, and returns the transformed value.
+Angular は最初の引数としてバインディングの値を持ち、リスト形式で 2 番目の引数としてすべてのパラメータを使って `transform` メソッドを呼び出し、変換された値を返します。
 
-### Example: Transforming a value exponentially
+### 例: 値を指数関数的に変換する
 
-In a game, you may want to implement a transformation that raises a value exponentially to increase a hero's power.
-For example, if the hero's score is 2, boosting the hero's power exponentially by 10 produces a score of 1024.
-You can use a custom pipe for this transformation.
+ゲームでは、ヒーローの力を高めるために、指数関数的に値を上げる変換を実装することができます。
+たとえば、ヒーローのスコアが 2 の場合、ヒーローのパワーを指数関数的に 10 ブーストすると、スコアは 1024 になります。
+この変換にはカスタムパイプを使用できます。
 
-The following code example shows two component definitions:
+次のコード例は 2 つのコンポーネント定義を示しています:
 
-* The `exponential-strength.pipe.ts` component defines a custom pipe named `exponentialStrength` with the `transform` method that performs the transformation.
-It defines an argument to the `transform` method (`exponent`) for a parameter passed to the pipe.
+* `exponential-strength.pipe.ts` コンポーネントは、変換を実行する `transform` メソッドを使用して `exponentialStrength` という名前のカスタムパイプを定義します。
+パイプに渡されるパラメーター (`exponent`) を `transform` メソッドの引数に定義します。
 
-* The `power-booster.component.ts` component demonstrates how to use the pipe, specifying a value (`2`) and the exponent parameter (`10`).
-Figure 2 shows the output.
+* `power-booster.component.ts` コンポーネントは、値 (`2`) と指数パラメーター (`10`) を指定してパイプを使用する方法を示しています。
+Figure 2 に出力を示します。
 
 <code-tabs>
   <code-pane
@@ -195,11 +195,11 @@ Figure 2 shows the output.
   <img src='generated/images/guide/pipes/power-booster.png' alt="Power Booster">
 </div>
 
-**Figure 2.** Output from the `exponentialStrength` pipe
+**Figure 2.** `exponentialStrength` パイプからの出力
 
 <div class="alert is-helpful">
 
-To examine the behavior the `exponentialStrength` pipe in the <live-example></live-example>, change the value and optional exponent in the template.
+<live-example></live-example> の `exponentialStrength` パイプの動作を調べるには、テンプレートの値とオプションの指数を変更します。
 
 </div>
 
