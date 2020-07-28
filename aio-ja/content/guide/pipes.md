@@ -178,7 +178,7 @@ Angular は最初の引数としてバインディングの値を持ち、リス
 パイプに渡されるパラメーター (`exponent`) を `transform` メソッドの引数に定義します。
 
 * `power-booster.component.ts` コンポーネントは、値 (`2`) と指数パラメーター (`10`) を指定してパイプを使用する方法を示しています。
-Figure 2 に出力を示します。
+Figure 2. に出力を示します。
 
 <code-tabs>
   <code-pane
@@ -205,30 +205,30 @@ Figure 2 に出力を示します。
 
 {@a change-detection}
 
-## Detecting changes with data binding in pipes
+## パイプのデータバインディングによる変更検知
 
-You use [data binding](/guide/glossary#data-binding "Definition of data binding") with a  pipe to display values and respond to user actions.
-If the data is a primitive input value, such as `String` or `Number`, or an object reference as input, such as `Date` or `Array`, Angular executes the pipe whenever it detects a change for the input value or reference.
+パイプで [データバインディング](/guide/glossary#data-binding "Definition of data binding") を使用して、値を表示し、ユーザーアクションに応答します。
+データが `String` や `Number` などのプリミティブな入力の値、または `Date` や `Array` などのオブジェクト参照の入力である場合、 Angular は入力値または参照の変更を検知するたびにパイプを実行します。
 
-For example, you could change the previous custom pipe example to use two-way data binding with `ngModel` to input the amount and boost factor, as shown in the following code example.
+たとえば、次のコード例に示すように、前のカスタムパイプの例を変更して、 `ngModel` で双方向データバインディングを使用して量とブースト係数を入力することができます。
 
 <code-example path="pipes/src/app/power-boost-calculator.component.ts" header="src/app/power-boost-calculator.component.ts">
 
 </code-example>
 
-The `exponentialStrength` pipe executes every time the user changes the "normal power" value or the "boost factor", as shown in Figure 3.
+Figure 3. に示すように、ユーザーが "normal power" の値、または "boost factor" を変更するたびに、 `exponentialStrength` パイプが実行されます。
 
 <div class="lightbox">
   <img src='generated/images/guide/pipes/power-boost-calculator-anim.gif' alt="Power Boost Calculator">
 </div>
 
-**Figure 3.** Changing the amount and boost factor for the `exponentialStrength` pipe
+**Figure 3.** `exponentialStrength` パイプの量とブースト係数を変更する
 
-Angular detects each change and immediately runs the pipe.
-This is fine for primitive input values.
-However, if you change something *inside* a composite object (such as the month of a date, an element of an array, or an object property), you need to understand how change detection works, and how to use an `impure` pipe.
+Angular は各変更を検知し、すぐにパイプを実行します。
+これはプリミティブな入力値には問題ありません。
+ただし、複合オブジェクト *内の* 何か (日付の月、配列の要素、オブジェクトのプロパティなど) を変更する場合は、変更検知のしくみと `不純な` パイプの使用方法を理解する必要があります。
 
-### How change detection works
+### 変更検知のしくみ
 
 Angular looks for changes to data-bound values in a [change detection](guide/glossary#change-detection "Definition of change detection") process that runs after every DOM event: every keystroke, mouse move, timer tick, and server response.
 The following example, which doesn't use a pipe, demonstrates how Angular uses its default change detection strategy to monitor and update its display of every hero in the `heroes` array.
